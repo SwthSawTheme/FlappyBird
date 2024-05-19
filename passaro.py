@@ -71,3 +71,6 @@ class Passaro:
         pos_centro_passaro = self.passaro.get_rect(topleft=(self.x,self.y)).center
         retangulo = imagem_rotacionada.get_rect(center=pos_centro_passaro)
         tela.blit(imagem_rotacionada, retangulo.topleft)
+        
+    def get_mask(self):
+        pygame.mask.from_surface(self.passaro)
