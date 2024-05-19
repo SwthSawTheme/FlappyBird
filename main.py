@@ -16,3 +16,6 @@ IMAGENS_PASSARO = [
 
 pygame.font.init()
 FONTE_PONTOS = pygame.font.SysFont("arial",50)
+
+if __name__ == "__main__":
+    pass
