@@ -21,3 +21,6 @@ class Cano:
         self.altura = random.randrange(50,450)
         self.pos_topo = self.altura - self.CANO_TOPO.get_height()
         self.pos_base = self.altura + self.DISTANCIA
+        
+    def mover(self):
+        self.x -= self.VELOCIDADE
