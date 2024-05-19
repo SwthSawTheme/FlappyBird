@@ -17,4 +17,7 @@ class Cano:
         self.passou = False
         self.definir_altura()
     
-    
+    def definir_altura(self):
+        self.altura = random.randrange(50,450)
+        self.pos_topo = self.altura - self.CANO_TOPO.get_height()
+        self.pos_base = self.altura + self.DISTANCIA
