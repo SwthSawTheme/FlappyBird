@@ -1,8 +1,9 @@
 from main import IMAGENS_PASSARO
+import pygame
 
 
 class Passaro:
-    IMAGENS_PASSARO
+    IMGS = IMAGENS_PASSARO
     #Animações da rotação
     ROTAÇÃO_MAXIMA = 25
     VLOCIDADE_ROTAÇÃO = 20
@@ -16,7 +17,7 @@ class Passaro:
         self.altura = self.y
         self.tempo = 0
         self.contagem_imagem = 0
-        self.passaro = IMAGENS_PASSARO[0]
+        self.passaro = self.IMGS[0]
         
     def pular(self):
         self.velocidade = -10.5
@@ -40,3 +41,33 @@ class Passaro:
             else:
                 if self.angulo > -90:
                     self.angulo -= self.VLOCIDADE_ROTAÇÃO
+    
+    def desenhar(self, tela):
+        self.contagem_imagem += 1
+        
+        if self.contagem_imagem < self.TEMPO_ANIMAÇÃO:
+            self.passaro = self.IMGS[0]
+            
+        elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*2:
+            self.passaro = self.IMGS[1]
+            
+        elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*3:
+            self.passaro = self.IMGS[2]
+            
+        elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*4:
+            self.passaro = self.IMGS[1]
+            
+        elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*4 + 1:
+            self.passaro = self.IMGS[0]
+            self.contagem_imagem = 0
+        
+        # se o passaro estiver caindo, não vai bater asa!
+        if self.angulo <= -80:
+            self.passaro = self.IMGS[1]
+            self.contagem_imagem = self.ROTAÇÃO_MAXIMA*2
+        
+        # desenhar passaro na tela
+        imagem_rotacionada = pygame.transform.rotate(self.passaro,self.angulo)
+        pos_centro_passaro = self.passaro.get_rect(topleft=(self.x,self.y)).center
+        retangulo = imagem_rotacionada.get_rect(center=pos_centro_passaro)
+        tela.blit(imagem_rotacionada, retangulo.topleft)
