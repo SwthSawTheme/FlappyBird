@@ -1,8 +1,13 @@
-from main import IMAGENS_PASSARO
 import pygame
+import os
 
 
 class Passaro:
+    IMAGENS_PASSARO = [
+    pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bird1.png"))),
+    pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bird2.png"))),
+    pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","bird3.png")))
+]
     IMGS = IMAGENS_PASSARO
     #Animações da rotação
     ROTAÇÃO_MAXIMA = 25
@@ -17,10 +22,10 @@ class Passaro:
         self.altura = self.y
         self.tempo = 0
         self.contagem_imagem = 0
-        self.passaro = self.IMGS[0]
+        self.imagem = self.IMGS[0]
         
     def pular(self):
-        self.velocidade = -10.5
+        self.velocidade = -8.5
         self.tempo = 0
         self.altura = self.y
         
@@ -46,31 +51,31 @@ class Passaro:
         self.contagem_imagem += 1
         
         if self.contagem_imagem < self.TEMPO_ANIMAÇÃO:
-            self.passaro = self.IMGS[0]
+            self.imagem = self.IMGS[0]
             
         elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*2:
-            self.passaro = self.IMGS[1]
+            self.imagem = self.IMGS[1]
             
         elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*3:
-            self.passaro = self.IMGS[2]
+            self.imagem = self.IMGS[2]
             
         elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*4:
-            self.passaro = self.IMGS[1]
+            self.imagem = self.IMGS[1]
             
         elif self.contagem_imagem < self.TEMPO_ANIMAÇÃO*4 + 1:
-            self.passaro = self.IMGS[0]
+            self.imagem = self.IMGS[0]
             self.contagem_imagem = 0
         
         # se o passaro estiver caindo, não vai bater asa!
         if self.angulo <= -80:
-            self.passaro = self.IMGS[1]
+            self.imagem = self.IMGS[1]
             self.contagem_imagem = self.ROTAÇÃO_MAXIMA*2
         
         # desenhar passaro na tela
-        imagem_rotacionada = pygame.transform.rotate(self.passaro,self.angulo)
-        pos_centro_passaro = self.passaro.get_rect(topleft=(self.x,self.y)).center
+        imagem_rotacionada = pygame.transform.rotate(self.imagem,self.angulo)
+        pos_centro_passaro = self.imagem.get_rect(topleft=(self.x,self.y)).center
         retangulo = imagem_rotacionada.get_rect(center=pos_centro_passaro)
         tela.blit(imagem_rotacionada, retangulo.topleft)
         
     def get_mask(self):
-        pygame.mask.from_surface(self.passaro)
+        return pygame.mask.from_surface(self.imagem)

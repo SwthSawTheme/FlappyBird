@@ -1,10 +1,10 @@
-from main import IMAGEM_CANO
-from passaro import Passaro
 import pygame
 import random
+import os
+
 
 class Cano:
-    
+    IMAGEM_CANO = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "pipe.png")))
     DISTANCIA = 200
     VELOCIDADE = 5
     
@@ -13,8 +13,8 @@ class Cano:
         self.altura = 0
         self.pos_topo = 0
         self.pos_base = 0
-        self.CANO_TOPO = pygame.transform.flip(IMAGEM_CANO, False, True)
-        self.CANO_BASE = IMAGEM_CANO
+        self.CANO_TOPO = pygame.transform.flip(self.IMAGEM_CANO, False, True)
+        self.CANO_BASE = self.IMAGEM_CANO
         self.passou = False
         self.definir_altura()
     
