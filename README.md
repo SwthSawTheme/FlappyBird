@@ -11,7 +11,7 @@
 - Certifique-se de ter todas as imagens necessárias na pasta `imgs` no mesmo diretório que o código Python.
 
 ### Executando o Jogo:
-- Após instalar as dependências, execute o arquivo Python `flappy_bird.py` em um ambiente Python compatível.
+- Após instalar as dependências, execute o arquivo Python `main.py` em um ambiente Python compatível.
 - O jogo será iniciado e você verá a tela inicial do Flappy Bird.
 
 ### Regras do Jogo:
